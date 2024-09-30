@@ -1,7 +1,15 @@
 <?php
+// Include the Composer autoloader
+require_once __DIR__ . '/../vendor/autoload.php';
+
+// Load environment variables from .env file
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR . '/../');
+$dotenv->load();
+
+//Database credentials
 $servername = "localhost";
 $username = "root";
-$password = "";
+$password = $_ENV['DB_PASSWORD'];
 $dbname = "address_book_db";
 
 // Create connection
