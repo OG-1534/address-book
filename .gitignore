@@ -1,2 +1,5 @@
+#Environment file with database credentials
 .env
+
+#Installed Composer packages
 vendor/
