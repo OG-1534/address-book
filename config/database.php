@@ -30,6 +30,4 @@ if ($conn->connect_error) {
 }
 
 echo "Connected Successfully";
-// Do not close the connection here
 ?>
-
