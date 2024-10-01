@@ -16,7 +16,6 @@ $result = $conn->query($query);
 if (!$result) {
     die("Query failed: " . $conn->error);
 }
-
 ?>
 
 <h2>Address Book Entries</h2>
@@ -49,7 +48,9 @@ if (!$result) {
 <a href="add_edit.php">Add New Entry</a>
 
 <?php
-// Free the result set and close the connection
-$result->free();
+// Free the result set and close the connection only after the data is processed
+if ($result) {
+    $result->free();
+}
 $conn->close();
 ?>
