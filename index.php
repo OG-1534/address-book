@@ -2,7 +2,7 @@
 // Include database connection
 include 'config/database.php';
 
-// Check if the connection is successful (this part can be optional since the check is already done in database.php)
+// Check if the connection is successful
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
@@ -18,7 +18,18 @@ if (!$result) {
 }
 ?>
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Address Book</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
 <h2>Address Book Entries</h2>
+
 <table border="1">
     <tr>
         <th>Name</th>
@@ -39,7 +50,7 @@ if (!$result) {
             <td><?php echo htmlspecialchars($row['city_name']); ?></td>
             <td>
                 <a href="add_edit.php?id=<?php echo $row['id']; ?>">Edit</a>
-                <a href="process.php?delete=<?php echo $row['id']; ?>">Delete</a>
+                <a href="process.php?delete=<?php echo $row['id']; ?>" onclick="return confirm('Are you sure you want to delete this entry?');">Delete</a>
             </td>
         </tr>
     <?php } ?>
@@ -47,8 +58,14 @@ if (!$result) {
 
 <a href="add_edit.php">Add New Entry</a>
 
+<!-- Link to JavaScript file -->
+<script src="js/scripts.js"></script>
+
+</body>
+</html>
+
 <?php
-// Free the result set and close the connection only after the data is processed
+// Free the result set and close the connection
 if ($result) {
     $result->free();
 }
