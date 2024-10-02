@@ -30,6 +30,13 @@ if (!$result) {
 
 <h2>Address Book Entries</h2>
 
+<!-- Action buttons for adding and exporting -->
+<div class="action-buttons">
+    <a href="add_edit.php" class="add-btn">Add New Entry</a>
+    <a href="export.php?export=xml" class="export-btn">Export to XML</a>
+    <a href="export.php?export=json" class="export-btn">Export to JSON</a>
+</div>
+
 <table border="1">
     <tr>
         <th>Name</th>
@@ -55,8 +62,6 @@ if (!$result) {
         </tr>
     <?php } ?>
 </table>
-
-<a href="add_edit.php">Add New Entry</a>
 
 <!-- Link to JavaScript file -->
 <script src="js/scripts.js"></script>
