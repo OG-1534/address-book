@@ -3,3 +3,6 @@
 
 #Installed Composer packages
 vendor/
+
+#JS packages
+node-modules/
