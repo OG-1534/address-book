@@ -1,7 +1,7 @@
 <?php
-include 'config/database.php';
+include 'config/database.php'; // Include database connection
 
-// Get cities for the dropdown
+// Fetch all cities for the dropdown
 $cities_query = "SELECT * FROM cities";
 $cities_result = $conn->query($cities_query);
 
@@ -26,7 +26,9 @@ if (isset($_GET['id'])) {
 
 <h2><?php echo isset($entry['id']) ? 'Edit Entry' : 'Add New Entry'; ?></h2>
 
+<!-- Form to add or edit an entry -->
 <form action="process.php" method="POST">
+    <!-- Hidden input to store entry ID when editing -->
     <input type="hidden" name="id" value="<?php echo isset($entry['id']) ? $entry['id'] : ''; ?>">
 
     <label for="name">Name:</label>
@@ -45,6 +47,7 @@ if (isset($_GET['id'])) {
     <input type="text" id="zip_code" name="zip_code" value="<?php echo isset($entry['zip_code']) ? htmlspecialchars($entry['zip_code']) : ''; ?>">
 
     <label for="city">City:</label>
+    <!-- Dropdown for cities, pre-select if editing an entry -->
     <select id="city" name="city_id" required>
         <?php while($row = $cities_result->fetch_assoc()) { ?>
             <option value="<?php echo $row['id']; ?>"

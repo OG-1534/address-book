@@ -7,14 +7,14 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// Fetch all entries from address_book
+// Fetch all entries with their city names
 $query = "SELECT address_book.*, cities.city_name FROM address_book
           JOIN cities ON address_book.city_id = cities.id";
 
 // Check if query was successful
-$result = $conn->query($query);
+$result = $conn->query($query); // Execute the query
 if (!$result) {
-    die("Query failed: " . $conn->error);
+    die("Query failed: " . $conn->error); // Show error if query fails
 }
 ?>
 
@@ -36,7 +36,7 @@ if (!$result) {
     <a href="export.php?export=xml" class="export-btn">Export to XML</a>
     <a href="export.php?export=json" class="export-btn">Export to JSON</a>
 </div>
-
+<!-- Display entries in a table -->
 <table border="1">
     <tr>
         <th>Name</th>
@@ -55,7 +55,8 @@ if (!$result) {
             <td><?php echo htmlspecialchars($row['street']); ?></td>
             <td><?php echo htmlspecialchars($row['zip_code']); ?></td>
             <td><?php echo htmlspecialchars($row['city_name']); ?></td>
-            <td>
+	    <td>
+		<!-- Links to edit and delete the entry -->
                 <a href="add_edit.php?id=<?php echo $row['id']; ?>">Edit</a>
                 <a href="process.php?delete=<?php echo $row['id']; ?>" onclick="return confirm('Are you sure you want to delete this entry?');">Delete</a>
             </td>
@@ -74,5 +75,5 @@ if (!$result) {
 if ($result) {
     $result->free();
 }
-$conn->close();
+$conn->close(); // Close the database connection
 ?>

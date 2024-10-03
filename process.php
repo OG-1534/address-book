@@ -1,7 +1,7 @@
 <?php
-include 'config/database.php';
+include 'config/database.php'; // Include database connection
 
-// Insert or Update Entry
+// Handle form submission to insert or update entry
 if (isset($_POST['save_entry'])) {
     $id = $_POST['id'];
     $name = $_POST['name'];
@@ -18,21 +18,23 @@ if (isset($_POST['save_entry'])) {
         // Insert new entry
         $query = "INSERT INTO address_book (name, first_name, email, street, zip_code, city_id) VALUES ('$name', '$first_name', '$email', '$street', '$zip_code', $city_id)";
     }
+
+    // Execute query and redirect
     if ($conn->query($query)) {
-        header('Location: index.php');
+        header('Location: index.php'); // Redirect to index upon success
     } else {
-        echo "Error: " . $conn->error;
+        echo "Error: " . $conn->error; // Show error if query fails
     }
 }
 
-// Delete Entry
+// Handle deleting an entry
 if (isset($_GET['delete'])) {
     $id = $_GET['delete'];
-    $query = "DELETE FROM address_book WHERE id=$id";
+    $query = "DELETE FROM address_book WHERE id=$id"; // Delete query
     if ($conn->query($query)) {
-        header('Location: index.php');
+        header('Location: index.php'); // Redirect after deleting successfully
     } else {
-        echo "Error: " . $conn->error;
+        echo "Error: " . $conn->error; // Show error if deletion fails
     }
 }
 ?>
